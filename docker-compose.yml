@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    image: chaoslab-docs:latest
+    container_name: chaoslab-docs
+    ports:
+      - "3001:80"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.chaoslab.description=Chaoslab API Documentation Portal"
+      - "com.chaoslab.service=docs"
+    networks:
+      - chaoslab-network
+
+  # Optional: Development mode with hot reload
+  docs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: chaoslab-docs:dev
+    container_name: chaoslab-docs-dev
+    ports:
+      - "3002:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
+    restart: unless-stopped
+    profiles:
+      - development
+    networks:
+      - chaoslab-network
+
+networks:
+  chaoslab-network:
+    driver: bridge
+    name: chaoslab-network

@@ -1,0 +1,30 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@site/*": ["./*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"]
+    }
+  },
+  "include": ["src", "docusaurus.config.ts", "sidebars.ts"],
+  "exclude": ["node_modules", "build", ".docusaurus"]
+}
