@@ -1,0 +1,22 @@
+# Development Dockerfile with hot reload
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies for better npm performance
+RUN apk add --no-cache libc6-compat git
+
+# Copy package files
+COPY package*.json ./
+
+# Install all dependencies (including dev dependencies)
+RUN npm ci
+
+# Copy source files
+COPY . .
+
+# Expose Docusaurus dev server port
+EXPOSE 3000
+
+# Start development server
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--port", "3000"]

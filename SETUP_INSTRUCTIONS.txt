@@ -1,0 +1,187 @@
+================================================================================
+  Chaoslab DOCUMENTATION PORTAL - FRONTEND
+  Setup Instructions
+================================================================================
+
+📍 CURRENT LOCATION
+  C:\Users\user\Documents\Chaoslab\chaoslab-frontend-temp\
+
+🎯 WHAT IS THIS?
+  This is the DOCUMENTATION PORTAL (frontend) for the Chaoslab API.
+  It has been separated from the backend API codebase.
+
+📦 WHAT'S INCLUDED?
+  ✓ Docusaurus documentation site
+  ✓ 68 markdown documentation files
+  ✓ React components (API Reference, GraphQL Playground)
+  ✓ Multi-language support (English, French)
+  ✓ All static assets and configurations
+
+🚀 QUICK START
+
+  Step 1: Install Dependencies (First Time Only)
+  ────────────────────────────────────────────────
+  cd C:\Users\user\Documents\Chaoslab\chaoslab-frontend-temp
+  npm install
+
+  (This will take 2-3 minutes)
+
+
+  Step 2: Start Development Server
+  ────────────────────────────────────────────────
+  npm start
+
+  The site will open automatically at: http://localhost:3001
+
+
+  Step 3: Start Backend API (In Separate Terminal)
+  ────────────────────────────────────────────────
+  cd C:\Users\user\Documents\Chaoslab\chaoslab
+  npm run dev
+
+  The API will run at: http://localhost:3000
+
+📖 AVAILABLE COMMANDS
+
+  npm start              Start development server (port 3001)
+  npm run build          Build for production
+  npm run serve          Serve production build
+  npm run optimize:images Optimize static images
+
+🌐 URLs
+
+  Frontend Development:  http://localhost:3001
+  Backend API:          http://localhost:3000
+  Backend GraphQL:      http://localhost:3000/graphql
+  Backend Swagger:      http://localhost:3000/docs
+
+📁 DIRECTORY STRUCTURE
+
+  chaoslab-frontend-temp/
+  ├── docs/                      ← All documentation (68 .md files)
+  ├── src/
+  │   ├── components/           ← React components
+  │   ├── css/                  ← Custom styles
+  │   └── pages/                ← Custom pages
+  ├── static/                   ← Static assets
+  ├── i18n/                     ← Translations
+  ├── scripts/                  ← Build scripts
+  ├── package.json              ← Dependencies & scripts
+  ├── docusaurus.config.ts      ← Main configuration
+  └── sidebars.ts               ← Sidebar structure
+
+🔧 CONFIGURATION
+
+  Main Config: docusaurus.config.ts
+  - Change site title, tagline
+  - Configure navbar and footer
+  - Set up search (Algolia)
+
+  Environment Variables: .env (optional)
+  ALGOLIA_APP_ID=your_app_id
+  ALGOLIA_API_KEY=your_api_key
+  ALGOLIA_INDEX_NAME=your_index
+
+🐳 DOCKER
+
+  Build:
+  docker build -t chaoslab-docs .
+
+  Run:
+  docker run -p 3001:80 chaoslab-docs
+
+🚢 DEPLOYMENT OPTIONS
+
+  1. GitHub Pages (Free)
+     npm run build
+     GIT_USER=<username> npm run deploy
+
+  2. Netlify (Free)
+     Build command: npm run build
+     Publish directory: build
+
+  3. Vercel (Free)
+     Build command: npm run build
+     Output directory: build
+
+  4. AWS S3 + CloudFront
+     npm run build
+     aws s3 sync build/ s3://your-bucket/ --delete
+
+🔗 BACKEND CONNECTION
+
+  The frontend connects to backend via:
+  - GraphQL endpoint: http://localhost:3000/graphql
+  - OpenAPI spec: static/openapi.yaml
+
+  In production, update endpoints in:
+  - src/components/GraphQLPlayground.tsx
+  - src/components/SwaggerUI.tsx
+
+✅ VERIFY IT WORKS
+
+  1. Install dependencies:
+     npm install
+
+  2. Start dev server:
+     npm start
+
+  3. Open browser:
+     http://localhost:3001
+
+  4. Check these pages work:
+     - Home: /
+     - Guides: /docs
+     - API Reference: /api
+     - GraphQL: /graphql
+
+🆘 TROUBLESHOOTING
+
+  Problem: npm install fails
+  Solution:
+    npm cache clean --force
+    del package-lock.json
+    npm install
+
+  Problem: Port 3001 in use
+  Solution:
+    Change port in package.json:
+    "start": "docusaurus start --port 3002"
+
+  Problem: Changes not appearing
+  Solution:
+    - Clear cache: del /s /q .docusaurus
+    - Restart: Ctrl+C then npm start
+
+  Problem: Build fails
+  Solution:
+    del /s /q node_modules .docusaurus
+    npm install
+    npm run build
+
+📚 DOCUMENTATION
+
+  - SEPARATION_COMPLETE.md          ← Overview of separation
+  - FRONTEND_SEPARATION_GUIDE.md    ← Detailed technical guide
+  - QUICK_START_SEPARATED.md        ← Quick reference
+  - README.md                       ← Frontend-specific docs
+
+🤝 DEVELOPMENT WORKFLOW
+
+  1. Backend developer works in:
+     C:\Users\user\Documents\Chaoslab\chaoslab\
+
+  2. Frontend/docs developer works in:
+     C:\Users\user\Documents\Chaoslab\chaoslab-frontend-temp\
+
+  3. Both can run simultaneously on different ports
+
+📞 SUPPORT
+
+  - Backend issues: Check chaoslab/ directory
+  - Frontend issues: Check this directory
+  - Integration: See FRONTEND_SEPARATION_GUIDE.md
+
+================================================================================
+  Ready to start? Run: npm install && npm start
+================================================================================
