@@ -113,6 +113,8 @@ jobs:
 
       - name: Build documentation site
         run: npm run build
+        env:
+          OPENAPI_SOURCE_URL: ${{ vars.OPENAPI_SOURCE_URL }}
 
       - name: Verify build artifacts
         run: |
@@ -197,6 +199,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          OPENAPI_SOURCE_URL: ${{ vars.OPENAPI_SOURCE_URL }}
 
       - name: Run Lighthouse CI
         run: |

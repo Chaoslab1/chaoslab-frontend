@@ -52,6 +52,7 @@ jobs:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+          OPENAPI_SOURCE_URL: ${{ vars.OPENAPI_SOURCE_URL }}
 
       - name: Deploy to Netlify (Staging)
         id: deploy
@@ -73,11 +74,11 @@ jobs:
         run: |
           echo "Waiting for deployment to be ready..."
           sleep 30
-          
+
           SITE_URL="${{ steps.deploy.outputs.url }}"
           MAX_RETRIES=12
           RETRY_COUNT=0
-          
+
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
             HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$SITE_URL")
             
@@ -90,7 +91,7 @@ jobs:
             sleep 10
             RETRY_COUNT=$((RETRY_COUNT + 1))
           done
-          
+
           echo "❌ Health check failed after $MAX_RETRIES attempts"
           exit 1
 
@@ -133,6 +134,7 @@ jobs:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+          OPENAPI_SOURCE_URL: ${{ vars.OPENAPI_SOURCE_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -147,10 +149,10 @@ jobs:
         run: |
           echo "Waiting for GitHub Pages to update..."
           sleep 60
-          
+
           PROD_URL="https://chaoslab1.github.io/chaoslab-frontend/"
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$PROD_URL")
-          
+
           if [ "$HTTP_CODE" = "200" ]; then
             echo "✅ Production deployment verified at $PROD_URL"
           else

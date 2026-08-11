@@ -33,16 +33,16 @@
 
 ## 📊 At a Glance
 
-| Metric | Status | Details |
-|--------|--------|---------|
-| **Production Readiness** | 9.5/10 ⭐ | Stellarwave certified |
-| **Test Coverage** | 70%+ ✅ | Jest + React Testing Library |
-| **CI/CD** | Automated ✅ | GitHub Actions (5 workflows) |
-| **Security** | Hardened 🔒 | Snyk + CodeQL + npm audit |
-| **Performance** | Optimized ⚡ | Lighthouse CI monitored |
-| **Documentation** | 68 pages 📚 | Comprehensive guides |
-| **Uptime Target** | 99.9% 🎯 | Health checks enabled |
-| **Languages** | 2 🌍 | English + French |
+| Metric                   | Status       | Details                      |
+| ------------------------ | ------------ | ---------------------------- |
+| **Production Readiness** | 9.5/10 ⭐    | Stellarwave certified        |
+| **Test Coverage**        | 70%+ ✅      | Jest + React Testing Library |
+| **CI/CD**                | Automated ✅ | GitHub Actions (5 workflows) |
+| **Security**             | Hardened 🔒  | Snyk + CodeQL + npm audit    |
+| **Performance**          | Optimized ⚡ | Lighthouse CI monitored      |
+| **Documentation**        | 68 pages 📚  | Comprehensive guides         |
+| **Uptime Target**        | 99.9% 🎯     | Health checks enabled        |
+| **Languages**            | 2 🌍         | English + French             |
 
 ---
 
@@ -59,7 +59,7 @@ graph LR
     B -->|Interactive Testing| D[GraphQL Playground]
     B -->|Guides & Tutorials| E[68 MD Pages]
     B -->|Multi-language| F[EN/FR Support]
-    
+
     style B fill:#2e8555,color:#fff
     style A fill:#4a9eff,color:#fff
 ```
@@ -88,17 +88,17 @@ graph TD
     A -->|Future| D[chaoslab-sdk]
     A -->|Future| E[chaoslab-mobile]
     A -->|Future| F[chaoslab-monitoring]
-    
+
     B -->|Serves API| G[REST/GraphQL Endpoints]
     B -->|Connects to| H[Stellar Network]
     B -->|Integrates| I[Mobile Money Providers]
-    
+
     C -->|Documents| B
     C -->|Deploys to| J[GitHub Pages]
-    
+
     D -.->|Will consume| G
     E -.->|Will use| D
-    
+
     style A fill:#e74c3c,color:#fff
     style B fill:#3498db,color:#fff
     style C fill:#2e8555,color:#fff
@@ -109,13 +109,21 @@ graph TD
 
 ### Repository Relationships
 
-| Repository | Purpose | Technology | Status |
-|------------|---------|------------|--------|
-| **[chaoslab-backend](https://github.com/Chaoslab1/chaoslab-backend)** | Core API server | Node.js + Express | ✅ Active |
-| **[chaoslab-frontend](https://github.com/Chaoslab1/chaoslab-frontend)** | Documentation portal | Docusaurus + React | ✅ Active |
-| **chaoslab-sdk** | Client libraries | TypeScript/Python | 🚧 Planned |
-| **chaoslab-mobile** | Mobile applications | React Native | 🚧 Planned |
-| **chaoslab-monitoring** | Observability stack | Grafana + Prometheus | 🚧 Planned |
+| Repository                                                              | Purpose              | Technology           | Status     |
+| ----------------------------------------------------------------------- | -------------------- | -------------------- | ---------- |
+| **[chaoslab-backend](https://github.com/Chaoslab1/chaoslab-backend)**   | Core API server      | Node.js + Express    | ✅ Active  |
+| **[chaoslab-frontend](https://github.com/Chaoslab1/chaoslab-frontend)** | Documentation portal | Docusaurus + React   | ✅ Active  |
+| **chaoslab-sdk**                                                        | Client libraries     | TypeScript/Python    | 🚧 Planned |
+| **chaoslab-mobile**                                                     | Mobile applications  | React Native         | 🚧 Planned |
+| **chaoslab-monitoring**                                                 | Observability stack  | Grafana + Prometheus | 🚧 Planned |
+
+> **⚠️ Naming collision — two "docs-portal"s exist, don't confuse them:**
+>
+> `chaoslab-backend` also contains its own Docusaurus site at `chaoslab-backend/docs-portal/` (`package.json` name: `chaoslab-backend-docs-portal`). It is **not** this repository. It's a narrower, backend-owned site — Redoc/Swagger pages generated straight from that repo's own `openapi.yaml` via a local file copy (`sync:openapi` there just does `fs.copyFileSync`) — built and deployed to its own GitHub Pages by `chaoslab-backend/.github/workflows/api-docs-portal.yml`, triggered on each backend release.
+>
+> **This repository (`chaoslab-frontend`)** is the canonical, public developer documentation portal: guides, KYC/webhooks/vaults/fees/deployment content, plus its own API Reference and GraphQL Playground pages. Since it's a separate deployment with no filesystem access to the backend's generated spec, it fetches its own copy over HTTP at build time instead (`npm run sync:openapi`, see [Environment Variables](#-environment-variables) for `OPENAPI_SOURCE_URL`) rather than reading the backend's local file the way `chaoslab-backend/docs-portal` does.
+>
+> If you're looking for developer-facing docs, you want **this repo**. If you're looking at the backend's own auto-generated API reference build step, that's the other one.
 
 ### Data Flow Between Repositories
 
@@ -126,7 +134,7 @@ sequenceDiagram
     participant API as Chaoslab API<br/>(Backend)
     participant Stellar as Stellar Network
     participant Mobile as Mobile Money<br/>Providers
-    
+
     Dev->>Docs: 1. Read API documentation
     Dev->>Docs: 2. Test with GraphQL Playground
     Docs->>API: 3. Proxy API requests (dev mode)
@@ -143,6 +151,7 @@ sequenceDiagram
 #### This Repository (chaoslab-frontend)
 
 **In Scope**:
+
 - ✅ Static documentation site generation
 - ✅ API reference presentation (Swagger UI)
 - ✅ GraphQL playground interface
@@ -154,6 +163,7 @@ sequenceDiagram
 - ✅ Accessibility compliance
 
 **Out of Scope**:
+
 - ❌ Backend API implementation
 - ❌ Database operations
 - ❌ Authentication/Authorization logic
@@ -164,6 +174,7 @@ sequenceDiagram
 #### Backend Repository (chaoslab-backend)
 
 **Backend Responsibilities**:
+
 - ✅ REST/GraphQL API endpoints
 - ✅ Business logic implementation
 - ✅ Database management (PostgreSQL)
@@ -184,22 +195,23 @@ graph LR
         B[Swagger UI]
         C[GraphQL Playground]
     end
-    
+
     subgraph Backend[API Server]
         D[REST Endpoints]
         E[GraphQL Endpoint]
         F[OpenAPI Spec]
     end
-    
+
     B -->|Consumes| F
     C -->|Queries| E
     A -->|Links to| D
-    
+
     style Frontend fill:#2e8555,color:#fff
     style Backend fill:#3498db,color:#fff
 ```
 
 **Connection Methods**:
+
 1. **OpenAPI Specification**: Backend generates `/openapi.yaml`, Frontend renders it
 2. **GraphQL Schema**: Frontend playground connects to `backend/graphql` endpoint
 3. **API Links**: Documentation deep-links to API endpoints
@@ -216,49 +228,49 @@ graph TB
     subgraph Internet
         Users[👥 Users/Developers]
     end
-    
+
     subgraph CDN["CDN Layer"]
         GH[GitHub Pages]
         CF[CloudFront Optional]
     end
-    
+
     subgraph Frontend["Documentation Portal (This Repo)"]
         DS[Docusaurus Static Site]
         SW[Swagger UI Component]
         GP[GraphQL Playground]
         MD[Markdown Docs 68 pages]
     end
-    
+
     subgraph Backend["API Server (chaoslab-backend)"]
         API[Express API Server]
         REST[REST Endpoints]
         GQL[GraphQL Endpoint]
         OAS[OpenAPI Spec]
     end
-    
+
     subgraph Infrastructure["Backend Infrastructure"]
         DB[(PostgreSQL)]
         Redis[(Redis Cache)]
         Queue[BullMQ Jobs]
     end
-    
+
     Users -->|HTTPS| GH
     GH --> DS
     DS --> SW
     DS --> GP
     DS --> MD
-    
+
     SW -.->|Reads Spec| OAS
     GP -.->|Queries Dev| GQL
     MD -.->|References| REST
-    
+
     API --> REST
     API --> GQL
     API --> OAS
     API --> DB
     API --> Redis
     API --> Queue
-    
+
     style Frontend fill:#2e8555,color:#fff
     style Backend fill:#3498db,color:#fff
     style Infrastructure fill:#34495e,color:#fff
@@ -272,18 +284,18 @@ graph TB
         DevLocal[Local Machine]
         DevDocker[Docker Compose]
     end
-    
+
     subgraph Staging["Staging Environment"]
         NetlifyStage[Netlify Preview]
         StageTests[Automated Tests]
     end
-    
+
     subgraph Prod["Production Environment"]
         GitHubPages[GitHub Pages]
         CDN[Global CDN]
         DNS[Custom Domain]
     end
-    
+
     subgraph CI["CI/CD Pipeline"]
         GHA[GitHub Actions]
         Security[Security Scans]
@@ -291,7 +303,7 @@ graph TB
         Build[Build & Test]
         Deploy[Deploy]
     end
-    
+
     DevLocal -->|Push| GHA
     GHA --> Security
     GHA --> Quality
@@ -301,7 +313,7 @@ graph TB
     Deploy -->|Manual Approval| GitHubPages
     GitHubPages --> CDN
     CDN --> DNS
-    
+
     style Dev fill:#95a5a6,color:#fff
     style Staging fill:#f39c12,color:#fff
     style Prod fill:#27ae60,color:#fff
@@ -323,7 +335,7 @@ sequenceDiagram
     participant Tests as Test Suite
     participant Deploy as Deployment
     participant Live as Live Site
-    
+
     Author->>Git: 1. Push markdown/code changes
     Git->>GHA: 2. Trigger CI workflow
     GHA->>Tests: 3. Run tests (Jest)
@@ -346,12 +358,12 @@ graph LR
     D[GraphQL Schema] -->|Playground| B
     E[Custom Pages] -->|React| B
     F[i18n JSON] -->|Translations| B
-    
+
     B -->|Webpack| G[Static Bundle]
     G -->|Optimization| H[Minified Assets]
     H -->|Output| I[Build Directory]
     I -->|Deploy| J[GitHub Pages]
-    
+
     style A fill:#e74c3c,color:#fff
     style B fill:#3498db,color:#fff
     style I fill:#2ecc71,color:#fff
@@ -366,19 +378,19 @@ graph TD
     B -->|GraphQL Testing| D[Playground]
     B -->|Guides| E[Documentation]
     B -->|Code Examples| F[Tutorials]
-    
+
     C -->|Test Endpoint| G[Send Request]
     D -->|Run Query| H[Execute GraphQL]
     E -->|Read| I[Learn Concepts]
     F -->|Copy Code| J[Integrate API]
-    
+
     G -->|Success| K[Implementation]
     H -->|Success| K
     I -->|Understanding| K
     J -->|Ready| K
-    
+
     K -->|Build App| L[Production Use]
-    
+
     style A fill:#3498db,color:#fff
     style K fill:#2ecc71,color:#fff
     style L fill:#27ae60,color:#fff
@@ -395,39 +407,39 @@ graph TB
         R[React 19.2.0]
         TS[TypeScript 5.7.2]
     end
-    
+
     subgraph API["API Documentation"]
         S[Swagger UI 5.32.8]
         Re[Redoc 2.5.1]
         GP[GraphQL Playground]
     end
-    
+
     subgraph Testing["Testing & Quality"]
         J[Jest 29.7.0]
         RTL[React Testing Library]
         ESL[ESLint 8.57.1]
         P[Prettier 3.4.2]
     end
-    
+
     subgraph Build["Build & Deploy"]
         W[Webpack via Docusaurus]
         D2[Docker Multi-stage]
         N[Nginx 1.27]
     end
-    
+
     subgraph CICD["CI/CD & DevOps"]
         GHA[GitHub Actions]
         SN[Snyk Security]
         CQ[CodeQL]
         LC[Lighthouse CI]
     end
-    
+
     D --> R
     R --> TS
     D --> S
     D --> Re
     D --> GP
-    
+
     style Core fill:#2e8555,color:#fff
     style API fill:#3498db,color:#fff
     style Testing fill:#e74c3c,color:#fff
@@ -440,29 +452,29 @@ graph TB
 <details>
 <summary><strong>📦 Production Dependencies</strong> (click to expand)</summary>
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `@docusaurus/core` | 3.10.1 | Core framework |
-| `@docusaurus/preset-classic` | 3.10.1 | Standard plugins |
-| `react` | 19.2.0 | UI library |
-| `react-dom` | 19.2.0 | DOM rendering |
-| `swagger-ui-react` | 5.32.8 | API documentation |
-| `redoc` | 2.5.1 | Alternative API docs |
-| `prism-react-renderer` | 2.4.1 | Code highlighting |
+| Package                      | Version | Purpose              |
+| ---------------------------- | ------- | -------------------- |
+| `@docusaurus/core`           | 3.10.1  | Core framework       |
+| `@docusaurus/preset-classic` | 3.10.1  | Standard plugins     |
+| `react`                      | 19.2.0  | UI library           |
+| `react-dom`                  | 19.2.0  | DOM rendering        |
+| `swagger-ui-react`           | 5.32.8  | API documentation    |
+| `redoc`                      | 2.5.1   | Alternative API docs |
+| `prism-react-renderer`       | 2.4.1   | Code highlighting    |
 
 </details>
 
 <details>
 <summary><strong>🔧 Development Dependencies</strong> (click to expand)</summary>
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| `typescript` | 5.7.2 | Type checking |
-| `jest` | 29.7.0 | Test runner |
-| `eslint` | 8.57.1 | Code linting |
-| `prettier` | 3.4.2 | Code formatting |
-| `husky` | 9.1.7 | Git hooks |
-| `@testing-library/react` | 16.1.0 | Component testing |
+| Package                  | Version | Purpose           |
+| ------------------------ | ------- | ----------------- |
+| `typescript`             | 5.7.2   | Type checking     |
+| `jest`                   | 29.7.0  | Test runner       |
+| `eslint`                 | 8.57.1  | Code linting      |
+| `prettier`               | 3.4.2   | Code formatting   |
+| `husky`                  | 9.1.7   | Git hooks         |
+| `@testing-library/react` | 16.1.0  | Component testing |
 
 </details>
 
@@ -519,7 +531,7 @@ graph LR
     I -->|Fail| D
     J --> K[Merge]
     K --> L[Auto Deploy]
-    
+
     style A fill:#3498db,color:#fff
     style F fill:#2ecc71,color:#fff
     style K fill:#27ae60,color:#fff
@@ -614,14 +626,14 @@ chaoslab-frontend/
 
 ### Key Directories Explained
 
-| Directory | Purpose | Owner |
-|-----------|---------|-------|
-| `/docs/` | Markdown documentation content | Content Team |
-| `/src/components/` | React UI components | Frontend Team |
-| `/src/pages/` | Custom documentation pages | Frontend Team |
-| `/.github/workflows/` | CI/CD automation | DevOps Team |
-| `/i18n/` | Translations (EN/FR) | Localization Team |
-| `/static/` | Images, fonts, assets | Design Team |
+| Directory             | Purpose                        | Owner             |
+| --------------------- | ------------------------------ | ----------------- |
+| `/docs/`              | Markdown documentation content | Content Team      |
+| `/src/components/`    | React UI components            | Frontend Team     |
+| `/src/pages/`         | Custom documentation pages     | Frontend Team     |
+| `/.github/workflows/` | CI/CD automation               | DevOps Team       |
+| `/i18n/`              | Translations (EN/FR)           | Localization Team |
+| `/static/`            | Images, fonts, assets          | Design Team       |
 
 ---
 
@@ -741,11 +753,13 @@ docker-compose --profile development up docs-dev
 ### Automated Deployments
 
 #### Staging (Netlify)
+
 - Triggers on every commit to `main`
 - Runs after CI passes
 - Preview URLs for pull requests
 
 #### Production (GitHub Pages)
+
 - Triggers on successful staging deployment
 - Manual approval required
 - URL: https://chaoslab1.github.io/chaoslab-frontend/
@@ -801,6 +815,23 @@ ALGOLIA_INDEX_NAME=your_index_name
 
 Apply for free DocSearch: https://docsearch.algolia.com/apply
 
+### OpenAPI Spec Sync
+
+```bash
+# .env
+OPENAPI_SOURCE_URL=http://localhost:3000
+```
+
+`npm run sync:openapi` (chained ahead of both `start` and `build`) fetches
+`<OPENAPI_SOURCE_URL>/docs/openapi.json` from a running `chaoslab-backend`
+and writes it to `static/openapi.yaml`, which the API Reference (Redoc) and
+Sandbox (Swagger UI) pages read from at `/openapi.yaml`. If unset or
+unreachable it logs a warning and skips itself rather than failing the
+build — those two pages just 404 until it's configured. See the
+[naming-collision note](#-project-ecosystem) above: this is a real HTTP
+fetch, unlike `chaoslab-backend/docs-portal`'s own `sync:openapi`, which
+just copies a local file since it's colocated with the generator.
+
 ### GitHub Secrets (CI/CD)
 
 Required for automated deployments:
@@ -825,6 +856,9 @@ GITHUB_TOKEN (auto-provided)
 ALGOLIA_APP_ID
 ALGOLIA_API_KEY
 ALGOLIA_INDEX_NAME
+
+# Optional: OpenAPI sync (repo/org variable, not a secret)
+OPENAPI_SOURCE_URL
 ```
 
 ## 📊 CI/CD Pipeline
@@ -836,22 +870,22 @@ graph TB
     A[Git Push] --> B{Branch?}
     B -->|Any Branch| C[CI Workflow]
     B -->|Main Branch| D[CI + CD Workflow]
-    
+
     C --> E[Security Scan]
     C --> F[Code Quality]
     C --> G[Tests]
     C --> H[Build]
     C --> I[Docker]
-    
+
     E --> J{All Pass?}
     F --> J
     G --> J
     H --> J
     I --> J
-    
+
     J -->|Yes| K[✅ Success]
     J -->|No| L[❌ Failed]
-    
+
     D --> E
     K --> M[CD Trigger]
     M --> N[Deploy Staging]
@@ -859,7 +893,7 @@ graph TB
     O -->|Pass| P[Deploy Production]
     P --> Q[Verify]
     Q --> R[✅ Live]
-    
+
     style A fill:#3498db,color:#fff
     style K fill:#2ecc71,color:#fff
     style L fill:#e74c3c,color:#fff
@@ -914,7 +948,7 @@ sequenceDiagram
     participant Approve as Manual Approval
     participant Prod as Production (GitHub Pages)
     participant Verify as Verification
-    
+
     CI->>Stage: 1. Deploy to staging
     Stage->>Health: 2. Run health checks
     Health->>Health: 3. Wait up to 5 min
@@ -941,13 +975,13 @@ sequenceDiagram
 
 ### Automated Workflows
 
-| Workflow | Trigger | Purpose | Duration |
-|----------|---------|---------|----------|
-| **CI** | Push/PR | Full quality checks | ~8-10 min |
-| **CD** | CI success on main | Deploy environments | ~5-7 min |
-| **CodeQL** | Weekly + PR | Security analysis | ~15 min |
-| **Dependency Review** | PR only | Dependency security | ~2 min |
-| **Stale** | Daily | Issue management | ~1 min |
+| Workflow              | Trigger            | Purpose             | Duration  |
+| --------------------- | ------------------ | ------------------- | --------- |
+| **CI**                | Push/PR            | Full quality checks | ~8-10 min |
+| **CD**                | CI success on main | Deploy environments | ~5-7 min  |
+| **CodeQL**            | Weekly + PR        | Security analysis   | ~15 min   |
+| **Dependency Review** | PR only            | Dependency security | ~2 min    |
+| **Stale**             | Daily              | Issue management    | ~1 min    |
 
 ###
 
@@ -996,13 +1030,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Chaoslab Ecosystem
 
-| Repository | Description | Status | Technology |
-|------------|-------------|--------|------------|
-| **[chaoslab-backend](https://github.com/Chaoslab1/chaoslab-backend)** | Core API server with Stellar integration | ✅ Production | Node.js + Express + PostgreSQL |
-| **[chaoslab-frontend](https://github.com/Chaoslab1/chaoslab-frontend)** | Documentation portal (this repo) | ✅ Production | Docusaurus + React + TypeScript |
-| **chaoslab-sdk** | Client libraries for easy integration | 🚧 Planned | TypeScript, Python, Go |
-| **chaoslab-mobile** | Mobile applications (iOS/Android) | 🚧 Planned | React Native |
-| **chaoslab-monitoring** | Observability and monitoring stack | 🚧 Planned | Grafana + Prometheus |
+| Repository                                                              | Description                              | Status        | Technology                      |
+| ----------------------------------------------------------------------- | ---------------------------------------- | ------------- | ------------------------------- |
+| **[chaoslab-backend](https://github.com/Chaoslab1/chaoslab-backend)**   | Core API server with Stellar integration | ✅ Production | Node.js + Express + PostgreSQL  |
+| **[chaoslab-frontend](https://github.com/Chaoslab1/chaoslab-frontend)** | Documentation portal (this repo)         | ✅ Production | Docusaurus + React + TypeScript |
+| **chaoslab-sdk**                                                        | Client libraries for easy integration    | 🚧 Planned    | TypeScript, Python, Go          |
+| **chaoslab-mobile**                                                     | Mobile applications (iOS/Android)        | 🚧 Planned    | React Native                    |
+| **chaoslab-monitoring**                                                 | Observability and monitoring stack       | 🚧 Planned    | Grafana + Prometheus            |
 
 ###
 
@@ -1032,16 +1066,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [![Production Ready](https://img.shields.io/badge/production-ready-brightgreen.svg)](https://github.com/Chaoslab1/chaoslab-frontend)
 [![9.5/10 Rating](https://img.shields.io/badge/rating-9.5%2F10-success.svg)](https://github.com/Chaoslab1/chaoslab-frontend)
 
-**[Documentation](https://chaoslab1.github.io/chaoslab-frontend/)** • 
-**[Backend API](https://github.com/Chaoslab1/chaoslab-backend)** • 
-**[Report Issue](https://github.com/Chaoslab1/chaoslab-frontend/issues)** • 
+**[Documentation](https://chaoslab1.github.io/chaoslab-frontend/)** •
+**[Backend API](https://github.com/Chaoslab1/chaoslab-backend)** •
+**[Report Issue](https://github.com/Chaoslab1/chaoslab-frontend/issues)** •
 **[Contribute](CONTRIBUTING.md)**
 
 ---
 
 **Made with ❤️ by the Chaoslab Team**
 
-*Powering the future of decentralized finance on Stellar*
+_Powering the future of decentralized finance on Stellar_
 
 **Part of the [Stellarwave Ecosystem](https://stellarwave.io)**
 
