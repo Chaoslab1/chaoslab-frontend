@@ -248,7 +248,7 @@ Plus complete working code in JavaScript and Python.
 ### For Security/Audit Teams (2 hours)
 
 1. Read: [BRIDGE_VAULT_CONTRACT.sol](./BRIDGE_VAULT_CONTRACT.sol) - Smart contract review
-2. Read: [STELLAR_EVM_BRIDGE_ARCHITECTURE.md](./BRIDGE_ARCHITECTURE.md) - Part 5 (Security risks)
+2. Read: [STELLAR_EVM_BRIDGE_ARCHITECTURE.md](./STELLAR_EVM_BRIDGE_ARCHITECTURE.md) - Part 5 (Security risks)
 3. Review: [BRIDGE_DEPLOYMENT_RUNBOOK.md](./BRIDGE_DEPLOYMENT_RUNBOOK.md) - Incident response
 
 ---

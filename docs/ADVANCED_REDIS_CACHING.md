@@ -97,7 +97,7 @@ const stats = await getCachedGeneralStats();
 // Provider stats also cached
 const byProvider = await getCachedVolumeByProvider(
   new Date("2024-01-01"),
-  new Date("2024-01-31"),
+  new Date("2024-01-31")
 );
 ```
 
@@ -149,7 +149,7 @@ Expected performance improvements:
 
 ### Response Time
 
-- **Cache hit**: <10ms average (vs 200-500ms for DB query)
+- **Cache hit**: &lt;10ms average (vs 200-500ms for DB query)
 - **Cache miss**: Same as DB query (backward compatible)
 
 ### Memory Usage

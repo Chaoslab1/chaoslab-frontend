@@ -113,7 +113,7 @@ Monthly:            $0 (infrastructure included)
 
 #### Use Cases
 
-- **Best for:** Quick market entry, lower transaction volumes (<$1M/month)
+- **Best for:** Quick market entry, lower transaction volumes (&lt;$1M/month)
 - **Works well:** As secondary bridge for liquidity optimization
 - **Not ideal:** High compliance requirements, large enterprise deployments
 
@@ -233,7 +233,7 @@ Chaoslab Platform
 | **Maturity**            | New        | Established | Emerging   | Mature        | Mature      | Established |
 | **Community Support**   | Minimal    | Active      | Growing    | Large         | Enterprise  | Large       |
 | **Scalability**         | Manual     | Automatic   | Automatic  | Automatic     | Automatic   | Automatic   |
-| **Latency**             | <5 min     | <10 min     | <5 min     | <15 min       | <10 min     | <20 min     |
+| **Latency**             | &lt;5 min  | &lt;10 min  | &lt;5 min  | &lt;15 min    | &lt;10 min  | &lt;20 min  |
 
 ---
 

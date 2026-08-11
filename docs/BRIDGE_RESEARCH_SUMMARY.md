@@ -327,16 +327,16 @@ Deliverable: Production-ready Stellar ↔ Ethereum bridge
 - ✅ 1000+ test transactions
 - ✅ Zero transaction failures
 - ✅ Validator consensus: 100%
-- ✅ Latency: <5 minutes lock→mint
-- ✅ Error rate: <0.1%
+- ✅ Latency: &lt;5 minutes lock→mint
+- ✅ Error rate: &lt;0.1%
 - ✅ Uptime: >99.95%
 
 ### Phase 2 Success Criteria (Production - Month 1)
 
 - ✅ 100+ transactions
 - ✅ Uptime: >99.9%
-- ✅ Error rate: <0.1%
-- ✅ Consensus time: <30 seconds
+- ✅ Error rate: &lt;0.1%
+- ✅ Consensus time: &lt;30 seconds
 - ✅ 0 security incidents
 - ✅ 500+ active users
 
@@ -346,7 +346,7 @@ Deliverable: Production-ready Stellar ↔ Ethereum bridge
 - ✅ 10K+ transactions
 - ✅ 5K+ active users
 - ✅ $20K/month platform revenue
-- ✅ <0.1% slashing incidents
+- ✅ &lt;0.1% slashing incidents
 
 ---
 

@@ -155,7 +155,7 @@ Returns a sample webhook payload that you can use for testing in Make.com.
 Mapping:
 
 - `phone_number` → To
-- `amount` → Body (use text formatter: "Transaction of {{amount}} {{currency}} completed")
+- `amount` → Body (use text formatter: `"Transaction of {{amount}} {{currency}} completed"`)
 - `reference_number` → Body (add to message)
 
 ### 2. Add Row to Google Sheets
@@ -180,7 +180,7 @@ Mapping:
 Mapping:
 
 - `user_id` → To (you may need to look up email from user ID)
-- `reference_number` → Subject ("Transaction {{reference_number}} Update")
+- `reference_number` → Subject (`"Transaction {{reference_number}} Update"`)
 - `amount` + `status` → Body (format transaction details)
 
 ### 4. Post to Slack
@@ -192,7 +192,7 @@ Mapping:
 
 - `#transactions` → Channel
 - `transaction_type` → Channel (use router to send to different channels)
-- `amount` + `currency` → Text ("{{transaction_type}}: {{amount}} {{currency}}")
+- `amount` + `currency` → Text (`"{{transaction_type}}: {{amount}} {{currency}}"`)
 - `reference_number` → Text (add reference)
 
 ### 5. Create HubSpot Contact

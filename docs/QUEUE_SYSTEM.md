@@ -28,14 +28,16 @@ The queue system provides:
 
 ## Queue Files
 
-| File                                                             | Description                                   |
-| ---------------------------------------------------------------- | --------------------------------------------- |
-| [`src/queue/config.ts`](src/queue/config.ts)                     | Queue configuration and Redis connection      |
-| [`src/queue/transactionQueue.ts`](src/queue/transactionQueue.ts) | Queue definition and job management functions |
-| [`src/queue/worker.ts`](src/queue/worker.ts)                     | Worker that processes jobs                    |
-| [`src/queue/dashboard.ts`](src/queue/dashboard.ts)               | Bull Board dashboard integration              |
-| [`src/queue/health.ts`](src/queue/health.ts)                     | Queue health check endpoints                  |
-| [`src/queue/index.ts`](src/queue/index.ts)                       | Public exports                                |
+All paths below are in `chaoslab-backend`, not this repository.
+
+| File                            | Description                                   |
+| ------------------------------- | --------------------------------------------- |
+| `src/queue/config.ts`           | Queue configuration and Redis connection      |
+| `src/queue/transactionQueue.ts` | Queue definition and job management functions |
+| `src/queue/worker.ts`           | Worker that processes jobs                    |
+| `src/queue/dashboard.ts`        | Bull Board dashboard integration              |
+| `src/queue/health.ts`           | Queue health check endpoints                  |
+| `src/queue/index.ts`            | Public exports                                |
 
 ## Usage
 

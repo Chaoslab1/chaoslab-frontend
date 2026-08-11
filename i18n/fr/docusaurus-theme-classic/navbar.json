@@ -1,9 +1,26 @@
 {
-  "title": "Chaoslab API",
-  "items": [
-    { "to": "/", "label": "Vue d'ensemble" },
-    { "type": "docSidebar", "sidebarId": "docsSidebar", "label": "Guides" },
-    { "to": "/api", "label": "Référence" },
-    { "href": "https://github.com/Chaoslab1/chaoslab-frontend", "label": "GitHub" }
-  ]
+  "title": {
+    "message": "Chaoslab API",
+    "description": "The title in the navbar"
+  },
+  "item.label.Overview": {
+    "message": "Vue d'ensemble",
+    "description": "Navbar item with label Overview"
+  },
+  "item.label.Guides": {
+    "message": "Guides",
+    "description": "Navbar item with label Guides"
+  },
+  "item.label.Reference": {
+    "message": "Référence",
+    "description": "Navbar item with label Reference"
+  },
+  "item.label.GraphQL Playground": {
+    "message": "GraphQL Playground",
+    "description": "Navbar item with label GraphQL Playground"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  }
 }

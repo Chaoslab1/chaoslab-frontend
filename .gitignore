@@ -10,6 +10,7 @@ yarn.lock
 # Generated files
 .docusaurus/
 .cache-loader/
+tsconfig.tsbuildinfo
 
 # Testing
 coverage/

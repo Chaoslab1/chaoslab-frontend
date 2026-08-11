@@ -175,7 +175,7 @@ npm run monitor:bridge \
 - ✅ 50+ test transactions completed
 - ✅ 0 transaction failures
 - ✅ Validator consensus: 100%
-- ✅ Lock→Mint latency: <5 minutes
+- ✅ Lock→Mint latency: &lt;5 minutes
 - ✅ 0 critical alerts
 
 ---
@@ -285,8 +285,8 @@ npm run bridge:config:set \
 
 - ✅ 100+ transactions completed
 - ✅ Uptime: >99.9%
-- ✅ Error rate: <0.1%
-- ✅ Consensus time: <30 seconds
+- ✅ Error rate: &lt;0.1%
+- ✅ Consensus time: &lt;30 seconds
 - ✅ 0 security incidents
 
 ---
@@ -421,10 +421,10 @@ groups:
 
 | Level             | Response Time | Impact               | Examples                                                 |
 | ----------------- | ------------- | -------------------- | -------------------------------------------------------- |
-| **P1 - Critical** | <15 min       | Platform unavailable | Smart contract exploit, validator crash, liquidity drain |
-| **P2 - High**     | <1 hour       | Degraded service     | High latency, 1 validator down, rate limiting triggered  |
-| **P3 - Medium**   | <4 hours      | Minor issue          | Slow consensus, high error rate, API 5xx errors          |
-| **P4 - Low**      | <1 day        | Non-urgent           | Documentation issues, analytics down                     |
+| **P1 - Critical** | &lt;15 min    | Platform unavailable | Smart contract exploit, validator crash, liquidity drain |
+| **P2 - High**     | &lt;1 hour    | Degraded service     | High latency, 1 validator down, rate limiting triggered  |
+| **P3 - Medium**   | &lt;4 hours   | Minor issue          | Slow consensus, high error rate, API 5xx errors          |
+| **P4 - Low**      | &lt;1 day     | Non-urgent           | Documentation issues, analytics down                     |
 
 ### P1 Critical Response
 

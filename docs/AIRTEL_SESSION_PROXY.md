@@ -574,6 +574,6 @@ Session caching in WEB mode significantly reduces latency for consecutive operat
 
 ## Related Documentation
 
-- [Orange Money Provider](./docs/ORANGE_INTEGRATION.md) - Similar multi-mode implementation
-- [Chaoslab Architecture](./docs/ARCHITECTURE.md) - Provider pattern design
-- [PACT Contract Tests](./tests/pact/airtel.pact.test.ts) - API contract validation
+- [Orange Money Provider](./ORANGE_INTEGRATION.md) - Similar multi-mode implementation
+- [Chaoslab Architecture](./ARCHITECTURE.md) - Provider pattern design
+- PACT Contract Tests (`tests/pact/airtel.pact.test.ts` in `chaoslab-backend`) - API contract validation

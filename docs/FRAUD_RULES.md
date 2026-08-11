@@ -98,5 +98,4 @@ npm test tests/services/fraud.test.ts
 - User risk profiling
 - IP address analysis
 - Device fingerprinting
-- Integration with external fraud databases</content>
-  <parameter name="filePath">c:\Users\HP\Desktop\drips\chaoslab\docs/FRAUD_RULES.md
+- Integration with external fraud databases

@@ -2,7 +2,7 @@
 
 **Issue:** [#531](https://github.com/chaoslab/chaoslab-api/issues/531) · **Status:** Research · **Scope:** Privacy-enhancing roadmap
 
-This document surveys the ZK techniques available for proving facts about a user's balance _without revealing the balance itself_, evaluates each option against Chaoslab's constraints (Stellar + off-chain chaoslab rails, mid-2026 tooling landscape), and recommends a staged adoption path. A companion prototype lives at [src/crypto/zkBalanceProof.ts](../src/crypto/zkBalanceProof.ts) and a production architecture in [ZK_BALANCE_PROOFS_ARCHITECTURE.md](./ZK_BALANCE_PROOFS_ARCHITECTURE.md).
+This document surveys the ZK techniques available for proving facts about a user's balance _without revealing the balance itself_, evaluates each option against Chaoslab's constraints (Stellar + off-chain chaoslab rails, mid-2026 tooling landscape), and recommends a staged adoption path. A companion prototype lives at [src/crypto/zkBalanceProof.ts](https://github.com/Chaoslab1/chaoslab-backend/blob/main/src/crypto/zkBalanceProof.ts) (in `chaoslab-backend`) and a production architecture in [ZK_BALANCE_PROOFS_ARCHITECTURE.md](./ZK_BALANCE_PROOFS_ARCHITECTURE.md).
 
 ---
 
@@ -24,7 +24,7 @@ Statements **S1** and **S3** are solvable with Sigma protocols (small constant-s
 
 | Scheme                        | Proof size                                 | Prover time | Verifier time | Setup                                  | Good for                     |
 | ----------------------------- | ------------------------------------------ | ----------- | ------------- | -------------------------------------- | ---------------------------- |
-| **Sigma protocols / Schnorr** | O(1) (small, ~100 B)                       | <1 ms       | <1 ms         | None                                   | S1, S3, bit proofs           |
+| **Sigma protocols / Schnorr** | O(1) (small, ~100 B)                       | &lt;1 ms    | &lt;1 ms      | None                                   | S1, S3, bit proofs           |
 | **Bulletproofs**              | O(log n) (~1 KB for 64-bit)                | ~30 ms      | ~15 ms        | None                                   | S2 range proofs ⭐           |
 | **Bulletproofs+**             | O(log n) (~20 % smaller than Bulletproofs) | ~30 ms      | ~15 ms        | None                                   | S2 (drop-in upgrade)         |
 | **Groth16 zk-SNARK**          | O(1) (~200 B)                              | ~seconds    | ~ms           | Trusted setup (per circuit)            | S2 at scale, privacy pools   |
@@ -54,14 +54,14 @@ Statements **S1** and **S3** are solvable with Sigma protocols (small constant-s
 
 ## 4. Prototype deliverables
 
-The file [src/crypto/zkBalanceProof.ts](../src/crypto/zkBalanceProof.ts) implements the four primitives that cover **S1**, **S3**, and the bit-decomposition building block for **S2**:
+The file [src/crypto/zkBalanceProof.ts](https://github.com/Chaoslab1/chaoslab-backend/blob/main/src/crypto/zkBalanceProof.ts) (in `chaoslab-backend`) implements the four primitives that cover **S1**, **S3**, and the bit-decomposition building block for **S2**:
 
 1. **Pedersen commitment** — `C = v·G + r·H`, perfectly hiding, computationally binding.
 2. **ZK proof of opening** — Schnorr/Sigma proof that the prover knows `(v, r)` for a given `C`. Non-interactive via Fiat-Shamir.
 3. **ZK equality of two committed values** — prove `C1` and `C2` commit to the same `v` under different blindings. Enables cross-ledger consistency (S3).
 4. **ZK proof that `C` commits to a bit** — Chaum-Pedersen OR-proof. The atomic building block for bit-decomposition range proofs.
 
-Tests live in [tests/crypto/zkBalanceProof.test.ts](../tests/crypto/zkBalanceProof.test.ts) — 17 cases, covering correctness, hiding, soundness (forged proofs, tampered commitments/responses), additive homomorphism, and an end-to-end scenario.
+Tests live in [tests/crypto/zkBalanceProof.test.ts](https://github.com/Chaoslab1/chaoslab-backend/blob/main/tests/crypto/zkBalanceProof.test.ts) (in `chaoslab-backend`) — 17 cases, covering correctness, hiding, soundness (forged proofs, tampered commitments/responses), additive homomorphism, and an end-to-end scenario.
 
 **What the prototype deliberately does NOT ship:**
 
@@ -107,7 +107,7 @@ Tests live in [tests/crypto/zkBalanceProof.test.ts](../tests/crypto/zkBalancePro
 | **P3 — Cross-ledger equality**       | Ship the equality-of-openings proof for anchor flows. Prove the balance on our ledger matches a committed value published by the anchor, without either side revealing it.                                                                                | SEP-31 partner asks for it                                    | 3–4 weeks |
 | **P4 — Privacy pool (long horizon)** | Merkle-tree of commitments + Groth16 membership proofs. Unlinkable transfers within the pool. Heavy lift: circuit design, trusted setup ceremony, regulator sign-off.                                                                                     | Regulatory clarity on mixers; 12+ months out                  | Large     |
 
-**Success criteria per phase:** P1 — proof generation <20 ms in-service, <300 ms on mobile; zero regressions in merchant checkout latency. P2 — 64-bit range proof <50 ms verify in Node, <200 ms prove on mid-range Android. P3 — end-to-end equality proof roundtrip <1 s across anchor network.
+**Success criteria per phase:** P1 — proof generation &lt;20 ms in-service, &lt;300 ms on mobile; zero regressions in merchant checkout latency. P2 — 64-bit range proof &lt;50 ms verify in Node, &lt;200 ms prove on mid-range Android. P3 — end-to-end equality proof roundtrip &lt;1 s across anchor network.
 
 ---
 

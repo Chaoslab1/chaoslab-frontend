@@ -1,6 +1,6 @@
 # ZK Balance Proofs — Architectural Proposal
 
-**Related:** [ZK_BALANCE_PROOFS_RESEARCH.md](./ZK_BALANCE_PROOFS_RESEARCH.md) · **Prototype:** [src/crypto/zkBalanceProof.ts](../src/crypto/zkBalanceProof.ts) · **Scope:** Phases P1 (commitment-only pilot) and P2 (range proofs) of the privacy roadmap.
+**Related:** [ZK_BALANCE_PROOFS_RESEARCH.md](./ZK_BALANCE_PROOFS_RESEARCH.md) · **Prototype:** [src/crypto/zkBalanceProof.ts](https://github.com/Chaoslab1/chaoslab-backend/blob/main/src/crypto/zkBalanceProof.ts) (in `chaoslab-backend`) · **Scope:** Phases P1 (commitment-only pilot) and P2 (range proofs) of the privacy roadmap.
 
 This document specifies _how_ Chaoslab integrates the primitives surveyed in the research doc into its production stack. It does not dictate what gets shipped when — that's the roadmap in the research doc — but it defines the component boundaries, storage layout, API surface, and failure modes so that P1 and P2 can be executed without re-litigating fundamentals.
 
@@ -184,7 +184,7 @@ auditor                 : assemble the Schnorr proof on H from both shares
 auditor                 : verify locally
 ```
 
-This is a two-party MPC variant of the equality protocol in [the prototype](../src/crypto/zkBalanceProof.ts). Building the MPC coordination is the P3 lift; the crypto itself is the existing equality proof.
+This is a two-party MPC variant of the equality protocol in [the prototype](https://github.com/Chaoslab1/chaoslab-backend/blob/main/src/crypto/zkBalanceProof.ts). Building the MPC coordination is the P3 lift; the crypto itself is the existing equality proof.
 
 ---
 

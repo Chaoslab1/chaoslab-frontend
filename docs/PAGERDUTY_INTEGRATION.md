@@ -339,9 +339,9 @@ MonitoringService.start(15000); // Check every 15 seconds instead of 30
 ## Related Documentation
 
 - [PagerDuty Events API V2](https://developer.pagerduty.com/docs/events-api-v2/overview/)
-- [Monitoring Architecture](../ARCHITECTURE.md)
+- [Monitoring Architecture](./ARCHITECTURE.md)
 - [Metrics Setup](./metrics.md)
-- [Error Handling](../CODE_COVERAGE.md)
+- [Error Handling](./CODE_COVERAGE.md)
 
 ## Support
 

@@ -361,9 +361,9 @@ src/jobs/
 **Success Metrics:**
 
 - Testnet transactions: 1000+ test transfers
-- Latency: <5 mins lock→mint
+- Latency: &lt;5 mins lock→mint
 - Validator consensus: 100% signed transactions
-- Error rate: <0.1%
+- Error rate: &lt;0.1%
 
 ---
 
@@ -928,7 +928,7 @@ export class AllbridgeService {
   async queryBridgeLiquidity(
     sourceChain: string,
     targetChain: string,
-    asset: string,
+    asset: string
   ) {
     return this.client.get("/liquidity", {
       params: { sourceChain, targetChain, asset },

@@ -314,7 +314,7 @@ No new configuration options are required. The implementation uses existing envi
 
 2. **Signature Verification**
    - O(n\*m) where n = signatures, m = signers
-   - Typically fast for account with <10 signers
+   - Typically fast for account with &lt;10 signers
 
 3. **Typical Latency**
    - Challenge generation: ~1ms
