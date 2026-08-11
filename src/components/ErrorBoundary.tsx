@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
@@ -13,7 +13,7 @@ interface State {
 
 /**
  * Error Boundary Component
- * 
+ *
  * Catches JavaScript errors anywhere in the child component tree,
  * logs errors, and displays a fallback UI.
  */
@@ -93,8 +93,8 @@ class ErrorBoundary extends Component<Props, State> {
             ⚠️ Something went wrong
           </h1>
           <p style={{ color: "#4a5568", marginBottom: "2rem" }}>
-            We're sorry for the inconvenience. An error occurred while rendering
-            this page.
+            We&apos;re sorry for the inconvenience. An error occurred while
+            rendering this page.
           </p>
 
           {process.env.NODE_ENV === "development" && this.state.error && (

@@ -1,15 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-dist/swagger-ui.css";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 interface SwaggerUIProps {
   specUrl?: string;
 }
 
+interface SwaggerUIRef {
+  specActions: { download: (url: string) => void };
+}
+
 export default function SwaggerUIComponent({ specUrl }: SwaggerUIProps) {
-  const { siteConfig } = useDocusaurusContext();
-  const swaggerRef = useRef<SwaggerUI>(null);
+  const swaggerRef = useRef<SwaggerUIRef>(null);
 
   const defaultSpecUrl = process.env.API_BASE_URL
     ? `${process.env.API_BASE_URL}/docs/openapi.json`

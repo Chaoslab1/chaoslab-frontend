@@ -4,7 +4,7 @@ import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 
 /**
  * Analytics Component
- * 
+ *
  * Tracks page views and performance metrics.
  * Configure analytics providers in docusaurus.config.ts
  */
@@ -61,12 +61,17 @@ function trackPageView(url: string): void {
 function trackWebVitals(): void {
   // Largest Contentful Paint (LCP)
   observeMetric("largest-contentful-paint", (entry) => {
-    sendMetric("LCP", entry.renderTime || entry.loadTime);
+    const lcpEntry = entry as PerformanceEntry & {
+      renderTime?: number;
+      loadTime?: number;
+    };
+    sendMetric("LCP", lcpEntry.renderTime || lcpEntry.loadTime || 0);
   });
 
   // First Input Delay (FID)
   observeMetric("first-input", (entry) => {
-    sendMetric("FID", entry.processingStart - entry.startTime);
+    const fidEntry = entry as PerformanceEntry & { processingStart: number };
+    sendMetric("FID", fidEntry.processingStart - entry.startTime);
   });
 
   // Cumulative Layout Shift (CLS)
