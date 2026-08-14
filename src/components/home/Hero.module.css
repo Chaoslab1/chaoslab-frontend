@@ -1,0 +1,94 @@
+.hero {
+  background: var(--chaos-hero-gradient);
+  border-bottom: 1px solid var(--chaos-surface-border);
+  padding: var(--chaos-space-2xl) var(--chaos-space-sm) var(--chaos-space-xl);
+}
+
+.inner {
+  max-width: var(--chaos-content-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary-darker);
+  margin: 0 0 var(--chaos-space-sm);
+}
+
+[data-theme="dark"] .eyebrow {
+  color: var(--ifm-color-primary-light);
+}
+
+.heading {
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1.1;
+  margin: 0 0 var(--chaos-space-md);
+  font-weight: 800;
+}
+
+.subhead {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--chaos-text-muted);
+  max-width: 720px;
+  margin: 0 auto var(--chaos-space-lg);
+}
+
+.ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--chaos-space-sm);
+  margin-bottom: var(--chaos-space-md);
+}
+
+.primaryCta,
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--chaos-radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.primaryCta {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  box-shadow: var(--chaos-shadow-md);
+}
+
+.primaryCta:hover {
+  background: var(--ifm-color-primary-darker);
+  color: #fff;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.secondaryCta {
+  background: var(--chaos-surface);
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--chaos-surface-border-strong);
+}
+
+.secondaryCta:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.status {
+  font-size: 0.9rem;
+  color: var(--chaos-text-muted);
+}
