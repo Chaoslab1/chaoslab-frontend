@@ -1,0 +1,50 @@
+.section {
+  composes: section from "./shared.module.css";
+  text-align: center;
+  border-top: 1px solid var(--chaos-surface-border);
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+  margin-bottom: 0.5rem;
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+  margin-bottom: var(--chaos-space-md);
+}
+
+.repoList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--chaos-space-sm);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.repoLink {
+  display: inline-block;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--chaos-radius-md);
+  border: 1px solid var(--chaos-surface-border-strong);
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.repoLink:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
