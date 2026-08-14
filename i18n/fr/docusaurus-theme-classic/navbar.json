@@ -1,26 +1,46 @@
 {
   "title": {
-    "message": "Chaoslab API",
+    "message": "Chaoslab",
     "description": "The title in the navbar"
   },
-  "item.label.Overview": {
-    "message": "Vue d'ensemble",
-    "description": "Navbar item with label Overview"
+  "item.label.Product": {
+    "message": "Produit",
+    "description": "Navbar item with label Product"
   },
-  "item.label.Guides": {
-    "message": "Guides",
-    "description": "Navbar item with label Guides"
+  "item.label.Architecture": {
+    "message": "Architecture",
+    "description": "Navbar item with label Architecture"
   },
-  "item.label.Reference": {
-    "message": "Référence",
-    "description": "Navbar item with label Reference"
+  "item.label.Developers": {
+    "message": "Développeurs",
+    "description": "Navbar item with label Developers"
+  },
+  "item.label.API Reference": {
+    "message": "Référence API",
+    "description": "Navbar item with label API Reference"
   },
   "item.label.GraphQL Playground": {
     "message": "GraphQL Playground",
     "description": "Navbar item with label GraphQL Playground"
   },
+  "item.label.Docs": {
+    "message": "Docs",
+    "description": "Navbar item with label Docs"
+  },
   "item.label.GitHub": {
     "message": "GitHub",
     "description": "Navbar item with label GitHub"
+  },
+  "item.label.chaoslab-App": {
+    "message": "chaoslab-App",
+    "description": "Navbar item with label chaoslab-App"
+  },
+  "item.label.chaoslab-backend": {
+    "message": "chaoslab-backend",
+    "description": "Navbar item with label chaoslab-backend"
+  },
+  "item.label.chaoslab-frontend": {
+    "message": "chaoslab-frontend",
+    "description": "Navbar item with label chaoslab-frontend"
   }
 }

@@ -7,8 +7,8 @@ import { themes as prismThemes } from "prism-react-renderer";
 dotenvConfig({ path: "./.env" });
 
 const config: Config = {
-  title: "Chaoslab API Portal",
-  tagline: "Searchable API docs powered by OpenAPI + Redoc",
+  title: "Chaoslab",
+  tagline: "Mobile money ↔ Stellar payments infrastructure for Africa",
   favicon: "img/logo.svg",
 
   future: {
@@ -23,6 +23,13 @@ const config: Config = {
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
+  // The navbar/footer link to in-page anchors (#ecosystem, #status) rendered
+  // by custom React components in src/components/home/*. Docusaurus's anchor
+  // checker only indexes ids it generates itself from MDX headings, so it
+  // can't see these and flags every page that links to them as broken even
+  // though the anchors are real and verified working. onBrokenLinks above
+  // still throws on genuinely broken page routes.
+  onBrokenAnchors: "ignore",
 
   i18n: {
     defaultLocale: "en",
@@ -66,21 +73,43 @@ const config: Config = {
       }),
 
     navbar: {
-      title: "Chaoslab API",
+      title: "Chaoslab",
       items: [
-        { to: "/", label: "Overview", position: "left" },
+        { to: "/", label: "Product", position: "left" },
+        { to: "/#ecosystem", label: "Architecture", position: "left" },
+        {
+          type: "dropdown",
+          label: "Developers",
+          position: "left",
+          items: [
+            { to: "/api", label: "API Reference" },
+            { to: "/graphql", label: "GraphQL Playground" },
+          ],
+        },
         {
           type: "docSidebar",
           sidebarId: "docsSidebar",
           position: "left",
-          label: "Guides",
+          label: "Docs",
         },
-        { to: "/api", label: "Reference", position: "left" },
-        { to: "/graphql", label: "GraphQL Playground", position: "left" },
         {
-          href: "https://github.com/Chaoslab1/chaoslab-frontend",
+          type: "dropdown",
           label: "GitHub",
           position: "right",
+          items: [
+            {
+              href: "https://github.com/Chaoslab1/chaoslab-App",
+              label: "chaoslab-App",
+            },
+            {
+              href: "https://github.com/Chaoslab1/chaoslab-backend",
+              label: "chaoslab-backend",
+            },
+            {
+              href: "https://github.com/Chaoslab1/chaoslab-frontend",
+              label: "chaoslab-frontend",
+            },
+          ],
         },
       ],
     },
@@ -88,10 +117,36 @@ const config: Config = {
       style: "dark",
       links: [
         {
-          title: "Docs",
+          title: "Product",
+          items: [
+            { label: "Overview", to: "/" },
+            { label: "Ecosystem", to: "/#ecosystem" },
+            { label: "Product status", to: "/#status" },
+          ],
+        },
+        {
+          title: "Developers",
           items: [
             { label: "API Reference", to: "/api" },
             { label: "GraphQL Playground", to: "/graphql" },
+            { label: "Guides", to: "/docs/BRIDGE_DOCUMENTATION_INDEX" },
+          ],
+        },
+        {
+          title: "Repositories",
+          items: [
+            {
+              label: "chaoslab-App",
+              href: "https://github.com/Chaoslab1/chaoslab-App",
+            },
+            {
+              label: "chaoslab-backend",
+              href: "https://github.com/Chaoslab1/chaoslab-backend",
+            },
+            {
+              label: "chaoslab-frontend",
+              href: "https://github.com/Chaoslab1/chaoslab-frontend",
+            },
           ],
         },
       ],
