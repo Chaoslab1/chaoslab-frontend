@@ -1,28 +1,33 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import Link from "@docusaurus/Link";
+import Hero from "@site/src/components/home/Hero";
+import Problem from "@site/src/components/home/Problem";
+import HowItWorks from "@site/src/components/home/HowItWorks";
+import Ecosystem from "@site/src/components/home/Ecosystem";
+import Capabilities from "@site/src/components/home/Capabilities";
+import Providers from "@site/src/components/home/Providers";
+import Security from "@site/src/components/home/Security";
+import Status from "@site/src/components/home/Status";
+import DeveloperResources from "@site/src/components/home/DeveloperResources";
+import OpenSource from "@site/src/components/home/OpenSource";
 
 export default function Home(): React.JSX.Element {
   return (
     <Layout
-      title="Developer Portal"
-      description="Chaoslab partner API docs"
+      title="Chaoslab — Mobile Money ↔ Stellar Payments Infrastructure"
+      description="Chaoslab bridges MTN MoMo, Airtel Money, and Orange Money with Stellar settlement for African cross-border payments. Explore the app, the API, and the docs."
     >
-      <main style={{ padding: "4rem 1.5rem", maxWidth: 900, margin: "0 auto" }}>
-        <h1>Chaoslab API Documentation Portal</h1>
-        <p>
-          This portal publishes a searchable, first-class API reference for
-          partners using the canonical <code>openapi.yaml</code> in this
-          repository.
-        </p>
-        <p style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-          <Link className="button button--primary button--lg" to="/api">
-            Open API Reference
-          </Link>
-          <Link className="button button--secondary button--lg" to="/graphql">
-            GraphQL Playground
-          </Link>
-        </p>
+      <main>
+        <Hero />
+        <Problem />
+        <HowItWorks />
+        <Ecosystem />
+        <Capabilities />
+        <Providers />
+        <Security />
+        <Status />
+        <DeveloperResources />
+        <OpenSource />
       </main>
     </Layout>
   );
