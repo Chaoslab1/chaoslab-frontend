@@ -82,6 +82,16 @@
   }
 }
 
+/* A visible, on-brand keyboard focus ring for the landing page's links,
+   cards, and buttons — :focus-visible so it only shows for keyboard/AT
+   navigation, not every mouse click. */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 /* Code block copy button styling */
 div.codeBlockContainer_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock-styles-module:hover
   .copyButton_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock-styles-module {
