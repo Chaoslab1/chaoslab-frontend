@@ -16,6 +16,7 @@ export default function SandboxPage(): React.JSX.Element {
         }
       >
         {() => {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports -- BrowserOnly requires a synchronous require() to defer this client-only module past SSR.
           const SwaggerUIComponent = require("../components/SwaggerUI").default;
           return <SwaggerUIComponent />;
         }}

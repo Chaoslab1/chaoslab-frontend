@@ -15,6 +15,7 @@ export default function GraphQLPage(): React.JSX.Element {
       >
         {() => {
           const GraphQLPlayground =
+            // eslint-disable-next-line @typescript-eslint/no-require-imports -- BrowserOnly requires a synchronous require() to defer this client-only module past SSR.
             require("../components/GraphQLPlayground").default;
           return <GraphQLPlayground />;
         }}

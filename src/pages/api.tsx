@@ -9,6 +9,7 @@ export default function ApiPage(): React.JSX.Element {
         fallback={<p style={{ padding: "2rem" }}>Loading API reference...</p>}
       >
         {() => {
+          // eslint-disable-next-line @typescript-eslint/no-require-imports -- BrowserOnly requires a synchronous require() to defer this client-only module past SSR.
           const ApiReference = require("../components/ApiReference").default;
           return <ApiReference />;
         }}
