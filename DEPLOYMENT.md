@@ -1,15 +1,38 @@
 # Deployment Guide
 
-Comprehensive guide for deploying the Chaoslab Documentation Portal to production.
+Comprehensive guide for deploying the Chaoslab public site (landing page + documentation portal) to production.
+
+## Deployment strategy (current decision)
+
+**Vercel is the canonical deployment target** for this repository going forward.
+It's the only target this repo is actively configured and verified for
+(`vercel.json`, root `baseUrl`, the Vercel-aware `url` resolution in
+`docusaurus.config.ts` — see [Vercel](#vercel) below).
+
+**Netlify** (`.github/workflows/cd.yml`) and **GitHub Pages** (manual
+`npm run deploy`) are **not being deleted in this change**. They're left in
+place deliberately so the site keeps deploying somewhere if Vercel isn't set
+up yet, and so this isn't a one-way door. Once a Vercel deployment has been
+live and verified for a reasonable period:
+
+1. Point the production domain (if any) at Vercel.
+2. Remove or disable `.github/workflows/cd.yml` (Netlify).
+3. Remove the GitHub Pages instructions below and the `deploy` script in
+   `package.json` if GitHub Pages was never actually enabled for this repo.
+
+Until that cleanup happens, treat Netlify/GitHub Pages instructions below as
+**legacy/coexisting**, not canonical.
 
 ## 📋 Table of Contents
 
+- [Deployment strategy](#deployment-strategy-current-decision)
 - [Prerequisites](#prerequisites)
 - [Environment Setup](#environment-setup)
+- [OpenAPI Sync](#openapi-sync)
 - [Deployment Options](#deployment-options)
+- [Vercel](#vercel)
 - [GitHub Pages](#github-pages)
 - [Netlify](#netlify)
-- [Vercel](#vercel)
 - [AWS S3 + CloudFront](#aws-s3--cloudfront)
 - [Docker Deployment](#docker-deployment)
 - [Post-Deployment](#post-deployment)
@@ -105,13 +128,94 @@ ALGOLIA_API_KEY=your_admin_key
 ALGOLIA_INDEX_NAME=your_index
 ```
 
+## OpenAPI Sync
+
+`npm run build` and `npm start` both run `scripts/sync-openapi.mjs` first.
+That script fetches the backend's live OpenAPI document from
+`${OPENAPI_SOURCE_URL}/docs/openapi.json` and writes it to
+`static/openapi.yaml`, which the `/api` (Redoc) and `/sandbox` (Swagger UI)
+pages read from at runtime.
+
+- **`OPENAPI_SOURCE_URL`** (falls back to `API_BASE_URL`, then
+  `http://localhost:3000`) — must point at a reachable `chaoslab-backend`
+  deployment for those two pages to have real content.
+- **This is non-fatal by design.** If the URL isn't reachable — no backend
+  configured, a contributor running `npm start` locally with no API, or a
+  CI/Vercel build with no `OPENAPI_SOURCE_URL` set — the script logs a
+  warning and leaves any previously-synced `static/openapi.yaml` in place
+  (or none, on a fresh checkout). The rest of the site, including the new
+  landing page, builds and deploys successfully regardless.
+- **No secret is required or exposed here.** The endpoint being fetched is a
+  public OpenAPI document, not an authenticated API — do not set this to a
+  URL that requires credentials, since the fetch in `sync-openapi.mjs`
+  doesn't send any.
+- If `OPENAPI_SOURCE_URL` is never set, the API Reference and Sandbox pages
+  will 404 in that deployment. That's expected and documented here rather
+  than silently guessed at — set it once a stable `chaoslab-backend` URL
+  exists.
+
 ## Deployment Options
+
+### Vercel
+
+This is the **canonical** deployment target — see
+[Deployment strategy](#deployment-strategy-current-decision) above.
+
+#### Configuration (already in this repo)
+
+- `vercel.json` pins the build explicitly rather than relying on
+  auto-detection, since the build runs a custom script
+  (`sync:openapi && docusaurus build`) ahead of the framework's own build
+  step:
+  - Install command: `npm ci`
+  - Build command: `npm run build`
+  - Output directory: `build` (confirmed against `docusaurus.config.ts` —
+    Docusaurus's default, unchanged in this repo)
+- `docusaurus.config.ts` resolves `url` from `SITE_URL` →
+  `VERCEL_PROJECT_PRODUCTION_URL` → `VERCEL_URL` → `http://localhost:3001`,
+  and `baseUrl` is `/` (root), matching how Vercel serves a project.
+
+#### Environment variables
+
+None are required for the build to succeed. Set these if you want full
+functionality:
+
+| Variable                                                    | Required? | Effect if unset                                                         |
+| ----------------------------------------------------------- | --------- | ----------------------------------------------------------------------- |
+| `OPENAPI_SOURCE_URL`                                        | No        | API Reference / Sandbox pages 404 (see [OpenAPI Sync](#openapi-sync))   |
+| `SITE_URL`                                                  | No        | Falls back to Vercel's own `VERCEL_PROJECT_PRODUCTION_URL`/`VERCEL_URL` |
+| `ALGOLIA_APP_ID` / `ALGOLIA_API_KEY` / `ALGOLIA_INDEX_NAME` | No        | Search is simply not enabled                                            |
+
+#### Deploying
+
+1. [vercel.com](https://vercel.com) → **Add New → Project** → import this
+   GitHub repository.
+2. Vercel reads `vercel.json` automatically — no manual build/output
+   configuration needed. If the dashboard shows different values, they're
+   safe to leave as-is; `vercel.json` takes precedence.
+3. Add any environment variables from the table above under **Project
+   Settings → Environment Variables**.
+4. Deploy. Every push to `main` redeploys production; every PR gets a
+   preview URL.
+
+#### Manual deployment (Vercel CLI)
+
+```bash
+npm install -g vercel
+vercel login
+vercel --prod
+```
 
 ### GitHub Pages
 
+_Legacy path — see [Deployment strategy](#deployment-strategy-current-decision). Not the canonical target._
+
 #### Automatic Deployment (Recommended)
 
-The CD workflow automatically deploys to GitHub Pages on successful staging deployment.
+GitHub Pages deployment is **not currently wired up in CI** — the CD
+workflow (`.github/workflows/cd.yml`) deploys to Netlify, not GitHub Pages
+(see [Netlify](#netlify) below). The steps below are for manual/future setup
+only.
 
 1. **Enable GitHub Pages**
    - Go to Settings → Pages
@@ -143,6 +247,8 @@ GIT_USER=your_username npm run deploy
 
 ### Netlify
 
+_Legacy path — see [Deployment strategy](#deployment-strategy-current-decision). Currently the only pipeline actually wired up in CI (`.github/workflows/cd.yml`), but no longer the canonical target going forward._
+
 #### Automatic Deployment (Recommended)
 
 Configured in `.github/workflows/cd.yml` for automatic deployments.
@@ -162,16 +268,17 @@ Configured in `.github/workflows/cd.yml` for automatic deployments.
    - Add production environment variables
 
 4. **Get Deployment Tokens**
+
    ```bash
    # Install Netlify CLI
    npm install -g netlify-cli
-   
+
    # Login
    netlify login
-   
+
    # Get site ID
    netlify sites:list
-   
+
    # Create auth token
    # Go to: https://app.netlify.com/user/applications
    ```
@@ -194,41 +301,6 @@ npm run build
 
 # Deploy to production
 netlify deploy --prod --dir=build
-```
-
-### Vercel
-
-#### Automatic Deployment
-
-1. **Import Project**
-   - Go to https://vercel.com
-   - Click "Add New" → "Project"
-   - Import from GitHub
-
-2. **Configure Project**
-   - Framework Preset: Other
-   - Build Command: `npm run build`
-   - Output Directory: `build`
-   - Install Command: `npm ci`
-
-3. **Set Environment Variables**
-   - Project Settings → Environment Variables
-   - Add production variables
-
-#### Manual Deployment
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Login
-vercel login
-
-# Build
-npm run build
-
-# Deploy to production
-vercel --prod
 ```
 
 ### AWS S3 + CloudFront
@@ -258,6 +330,7 @@ aws s3api put-bucket-policy \
 ```
 
 **s3-bucket-policy.json**:
+
 ```json
 {
   "Version": "2012-10-17",
@@ -368,22 +441,22 @@ spec:
         app: chaoslab-docs
     spec:
       containers:
-      - name: chaoslab-docs
-        image: chaoslab/chaoslab-docs:latest
-        ports:
-        - containerPort: 80
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: chaoslab-docs
+          image: chaoslab/chaoslab-docs:latest
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ---
 apiVersion: v1
 kind: Service
@@ -393,12 +466,13 @@ spec:
   selector:
     app: chaoslab-docs
   ports:
-  - port: 80
-    targetPort: 80
+    - port: 80
+      targetPort: 80
   type: LoadBalancer
 ```
 
 Deploy:
+
 ```bash
 kubectl apply -f deployment.yaml
 ```
