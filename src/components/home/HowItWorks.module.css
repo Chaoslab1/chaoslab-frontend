@@ -1,0 +1,94 @@
+.section {
+  composes: sectionAlt from "./shared.module.css";
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--chaos-space-xs);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.stepCard {
+  background: var(--chaos-surface);
+  border: 1px solid var(--chaos-surface-border);
+  border-radius: var(--chaos-radius-md);
+  box-shadow: var(--chaos-shadow-sm);
+  padding: var(--chaos-space-sm);
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.stepIndex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.stepLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.stepBody {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--chaos-text-muted);
+  margin: 0;
+}
+
+.connector {
+  flex-shrink: 0;
+  color: var(--chaos-text-muted);
+  font-size: 1.25rem;
+  padding: 0 0.4rem;
+}
+
+@media (max-width: 900px) {
+  .flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .step {
+    flex-direction: column;
+  }
+
+  .connector {
+    transform: rotate(90deg);
+    align-self: center;
+    padding: 0.25rem 0;
+  }
+}
