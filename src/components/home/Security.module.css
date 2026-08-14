@@ -1,0 +1,57 @@
+.section {
+  composes: sectionAlt from "./shared.module.css";
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--chaos-space-md);
+  margin-bottom: var(--chaos-space-md);
+}
+
+.card {
+  composes: card from "./shared.module.css";
+  background: var(--ifm-background-color);
+}
+
+.cardTitle {
+  composes: cardTitle from "./shared.module.css";
+  font-size: 1rem;
+}
+
+.cardBody {
+  composes: cardBody from "./shared.module.css";
+  font-size: 0.88rem;
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--chaos-text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
