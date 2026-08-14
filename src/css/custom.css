@@ -23,6 +23,65 @@
   --ifm-color-primary-lightest: #4fddbf;
 }
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   Landing page design tokens
+   ══════════════════════════════════════════════════════════════════════════════
+   Shared spacing/surface/elevation scale for the marketing sections in
+   src/components/home/*. Layered on top of Infima's own tokens rather than
+   replacing them, so the landing page and the docs theme stay visually
+   consistent and both respond to the same light/dark toggle. */
+:root {
+  --chaos-space-xs: 0.5rem;
+  --chaos-space-sm: 1rem;
+  --chaos-space-md: 1.5rem;
+  --chaos-space-lg: 2.5rem;
+  --chaos-space-xl: 4rem;
+  --chaos-space-2xl: 6rem;
+
+  --chaos-radius-md: 12px;
+  --chaos-radius-lg: 20px;
+
+  --chaos-content-width: 1120px;
+
+  --chaos-surface: var(--ifm-background-surface-color);
+  --chaos-surface-border: var(--ifm-color-emphasis-300);
+  --chaos-surface-border-strong: var(--ifm-color-emphasis-400);
+  --chaos-text-muted: var(--ifm-color-emphasis-700);
+
+  --chaos-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --chaos-shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+
+  --chaos-hero-gradient: linear-gradient(
+    160deg,
+    var(--ifm-color-primary-lightest) 0%,
+    var(--ifm-background-color) 55%
+  );
+}
+
+[data-theme="dark"] {
+  --chaos-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --chaos-shadow-md: 0 8px 28px rgba(0, 0, 0, 0.45);
+
+  --chaos-hero-gradient: linear-gradient(
+    160deg,
+    var(--ifm-color-primary-darkest) 0%,
+    var(--ifm-background-color) 55%
+  );
+}
+
+/* Respect the OS-level motion preference across both the landing page and
+   the pre-existing GraphQL Playground pulse/spin animations below. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Code block copy button styling */
 div.codeBlockContainer_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock-styles-module:hover
   .copyButton_node_modules-\@docusaurus-theme-classic-src-theme-CodeBlock-styles-module {
