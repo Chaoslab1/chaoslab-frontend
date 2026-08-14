@@ -1,0 +1,68 @@
+.section {
+  composes: section from "./shared.module.css";
+  scroll-margin-top: 5rem;
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--chaos-space-md);
+}
+
+.column {
+  composes: card from "./shared.module.css";
+}
+
+.columnTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 var(--chaos-space-sm);
+}
+
+.dotAvailable,
+.dotProgress {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dotAvailable {
+  background: var(--ifm-color-success, #16a34a);
+}
+
+.dotProgress {
+  background: var(--ifm-color-warning, #d97706);
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--chaos-text-muted);
+  line-height: 1.7;
+}
+
+.list li {
+  margin-bottom: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
