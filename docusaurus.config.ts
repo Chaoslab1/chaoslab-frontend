@@ -74,6 +74,22 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Default social-card image for pages that don't set their own via
+    // Layout's `image` prop. This is the existing 100x100 logo mark, not a
+    // dedicated wide OG banner — see metadata.twitter:card below, which
+    // deliberately stays "summary" rather than Docusaurus's
+    // image-triggered default of "summary_large_image" so a square icon
+    // doesn't get stretched in link previews. Swap in a proper 1200x630
+    // banner asset when one exists.
+    image: "img/logo.svg",
+    metadata: [
+      {
+        name: "keywords",
+        content:
+          "Stellar, mobile money, cross-border payments, MTN MoMo, Airtel Money, Orange Money, Africa fintech, payments API",
+      },
+      { name: "twitter:card", content: "summary" },
+    ],
     // -------------------------------------------------------------------------
     // Algolia DocSearch – full-text search for the docs portal
     // -------------------------------------------------------------------------

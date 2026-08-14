@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap is generated automatically at /sitemap.xml (Docusaurus's default
+# sitemap plugin). This file doesn't hardcode a domain because the
+# production URL isn't fixed here — see docusaurus.config.ts's `siteUrl`
+# resolution and DEPLOYMENT.md. Once a production domain is live, submit
+# https://<production-domain>/sitemap.xml directly in Google Search
+# Console / Bing Webmaster Tools rather than adding a domain-specific
+# "Sitemap:" line here.
