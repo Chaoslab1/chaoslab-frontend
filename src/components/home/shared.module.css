@@ -1,0 +1,54 @@
+/* Shared layout primitives composed into the individual home/*.module.css
+   files below (`composes: x from "./shared.module.css"`). Keeps every
+   landing section on the same content width/spacing rhythm without
+   repeating the same rules ten times. */
+
+.section {
+  padding: var(--chaos-space-xl) var(--chaos-space-sm);
+}
+
+.sectionAlt {
+  padding: var(--chaos-space-xl) var(--chaos-space-sm);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.inner {
+  max-width: var(--chaos-content-width);
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  margin: 0 0 var(--chaos-space-sm);
+  text-align: center;
+}
+
+.intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--chaos-text-muted);
+  max-width: 680px;
+  margin: 0 auto var(--chaos-space-lg);
+  text-align: center;
+}
+
+.card {
+  background: var(--chaos-surface);
+  border: 1px solid var(--chaos-surface-border);
+  border-radius: var(--chaos-radius-lg);
+  padding: var(--chaos-space-md);
+  box-shadow: var(--chaos-shadow-sm);
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.cardBody {
+  color: var(--chaos-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}

@@ -1,0 +1,39 @@
+.section {
+  composes: section from "./shared.module.css";
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--chaos-space-md);
+}
+
+.card {
+  composes: card from "./shared.module.css";
+}
+
+.cardTitle {
+  composes: cardTitle from "./shared.module.css";
+}
+
+.cardBody {
+  composes: cardBody from "./shared.module.css";
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
