@@ -6,6 +6,22 @@ import { themes as prismThemes } from "prism-react-renderer";
 // Load environment variables from .env (local development)
 dotenvConfig({ path: "./.env" });
 
+// The canonical site URL, resolved without hardcoding a domain:
+// 1. SITE_URL — set this explicitly once a custom/production domain exists.
+// 2. VERCEL_PROJECT_PRODUCTION_URL — set automatically by Vercel on the
+//    project's production deployment (no protocol, so it's prefixed here).
+// 3. VERCEL_URL — set automatically by Vercel on every deployment
+//    (production and preview), so preview builds still get a correct,
+//    working canonical/sitemap/OG url instead of a wrong or empty one.
+// 4. localhost — local dev / any build environment with none of the above.
+const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const vercelDeploymentUrl = process.env.VERCEL_URL;
+const siteUrl =
+  process.env.SITE_URL ||
+  (vercelProductionUrl ? `https://${vercelProductionUrl}` : undefined) ||
+  (vercelDeploymentUrl ? `https://${vercelDeploymentUrl}` : undefined) ||
+  "http://localhost:3001";
+
 const config: Config = {
   title: "Chaoslab",
   tagline: "Mobile money ↔ Stellar payments infrastructure for Africa",
@@ -15,8 +31,12 @@ const config: Config = {
     v4: true,
   },
 
-  url: "https://chaoslab1.github.io",
-  baseUrl: "/chaoslab-frontend/",
+  url: siteUrl,
+  // "/" for Vercel/Netlify/custom-domain hosting, which all serve the site
+  // from the domain root. Only GitHub Pages project sites need a
+  // "/<repo-name>/" sub-path, and GitHub Pages is no longer the deployment
+  // target — see DEPLOYMENT.md for the full pipeline decision.
+  baseUrl: "/",
 
   organizationName: "Chaoslab1",
   projectName: "chaoslab-frontend",
