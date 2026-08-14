@@ -1,0 +1,76 @@
+.section {
+  composes: sectionAlt from "./shared.module.css";
+}
+
+.inner {
+  composes: inner from "./shared.module.css";
+}
+
+.heading {
+  composes: heading from "./shared.module.css";
+}
+
+.intro {
+  composes: intro from "./shared.module.css";
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--chaos-space-md);
+}
+
+.card {
+  composes: card from "./shared.module.css";
+  background: var(--ifm-background-color);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cardBody {
+  composes: cardBody from "./shared.module.css";
+  font-size: 0.92rem;
+}
+
+.badgeApp,
+.badgeBackend {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badgeApp {
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+}
+
+.badgeBackend {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+}
+
+[data-theme="dark"] .badgeApp {
+  background: var(--ifm-color-primary-darkest);
+  color: var(--ifm-color-primary-lightest);
+}
+
+[data-theme="dark"] .badgeBackend {
+  background: var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-emphasis-900);
+}
